@@ -1,0 +1,30 @@
+<template>
+  <div style="background:#f5f5f5;padding:15px">
+     {{a}}
+  </div>
+</template>
+
+<script>
+import store from '../plugin/store'    
+export default {
+    data: {
+        a: '我是list'
+    },
+    store,
+    beforeCreate: function () {
+        console.log('生成list组件')
+    },
+    beforeDestroy: function () {
+        console.log('list组件被摧毁了')
+    },  
+    methods: {
+        showP: function () {
+            alert(this.arr);
+        }
+    }
+}
+</script>
+
+<style>
+
+</style>

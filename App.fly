@@ -1,0 +1,152 @@
+<template>
+  <div id="app">
+    <div class="a">
+      <h2>{{}}解析</h2>
+      <div class="content">
+        <input value="{{title}}" />
+        <div>{{title}}</div>
+      </div>
+      <h2>computed - 计算属性</h2>
+      <div class="content">
+        <div>{{title2}}</div>
+      </div>
+
+      <h2>双向绑定 - m-model</h2>
+      <div class="content">
+        <input m-model="arr" />
+        <div>{{arr}}</div>
+      </div>
+
+      <h2>点击事件 - m-click</h2>
+      <div class="content">
+        <div m-on:click="test">点击触发</div>
+      </div>
+
+      <h2>是否显示 - m-if</h2>
+      <div class="content">
+        <h1 m-if="show">显示{{title}}</h1>
+        <button m-on:click="toggle">点击显示/隐藏</button>
+      </div>
+
+      <h2>循环 - m-for</h2>
+      <ul class="content">
+        <li m-for="(val, key, index) in list">索引 {{key + 1}} ：{{val}}</li>
+      </ul>
+      <br />
+
+      <h2>子组件</h2>
+      <div class="content">
+        <c m-if="cshow" arr></c>
+        <button m-on:click="togglec">点击摧毁/生成子组件</button>
+      </div>
+
+      <h2>vuex</h2>
+      <div class="content">
+        <p>{{counter}}</p>
+        <button m-on:click="changeState">改变值</button>
+      </div>
+
+      <h2>router</h2>
+      <div class="content">
+        <a href="#/home" style="margin-right:10px">home</a>
+        <a href="#/list">list</a>
+        <div id="router">
+          <router-view></router-view>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+  export default {
+    components: {
+      c: {
+        template: `<div style="background:#f5f5f5;padding:15px">
+        <div>{{a}}</div>
+        <input m-model="a">
+        <button m-on:click='showP'>获取父元素arr值</button>
+        </div>`,
+        data: {
+          a: "我是子组件"
+        },
+        methods: {
+          showP: function () {
+            alert(this.arr);
+          }
+        },
+        beforeCreate: function () {
+          console.log("生成子组件");
+        },
+        beforeDestroy: function () {
+          console.log("子组件被摧毁了");
+        }
+      }
+    },
+    data: {
+      a: true,
+      show: true,
+      cshow: false,
+      title: "标题",
+      class: "c",
+      obj: { a: { b: 2 } },
+      list: [1, 2, 3, 4],
+      arr: 1
+    },
+    computed: {
+      title2: function () {
+        console.log("初次title2");
+        return this.title + 2;
+      },
+      title3: {
+        get: function () {
+          return this.title + 3;
+        },
+        set: function (v) {
+          this.title = v - 1;
+        }
+      },
+      counter: function () {
+        return this.$store.state.counter;
+      }
+    },
+    watch: {
+      title: function (o, n) {
+        console.log(o, n);
+      },
+      title2: function (o, n) {
+        console.log(o, n);
+      },
+      title3: function (o, n) {
+        console.log(o, n);
+      }
+    },
+    methods: {
+      test: function () {
+        alert(this.title + "点击");
+      },
+      toggle: function () {
+        this.show = !this.show;
+      },
+      togglec: function () {
+        console.log("togglec");
+        this.cshow = !this.cshow;
+      },
+      changeState() {
+        this.$store.commit("add");
+      }
+    },
+    beforeCreate: function () {
+      console.log("beforeCreate");
+    },
+    beforeUpdate: function () {
+      console.log("beforeUpdate");
+    },
+    created: function () {
+      console.log("created");
+    }
+  };
+</script>
+
+<style>
+</style>

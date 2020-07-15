@@ -1,0 +1,10 @@
+[core]
+	repositoryformatversion = 0
+	filemode = false
+	bare = false
+	logallrefupdates = true
+	autocrlf=false
+	symlinks = false
+	ignorecase = true
+	username=yangyongfei
+	email=941237921@qq.com

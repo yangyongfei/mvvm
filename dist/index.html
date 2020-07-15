@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        h2 {
+            background-color: #50abf2;
+            font-size: 14px;
+            color: #fff;
+            padding: 10px 20px;
+            /* text-align: center; */
+            font-weight: 400;
+        }
+
+        h1 {
+            font-size: 24px;
+            padding: 20px 0;
+        }
+
+        input {
+            width: 200px;
+            line-height: 50px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            outline: none;
+            text-align: center;
+        }
+
+        div {
+            padding: 20px;
+        }
+
+        ul,
+        li {
+            list-style: none;
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        button {
+            background-color: #50abf2;
+            font-size: 14px;
+            color: #fff;
+            text-align: center;
+            font-weight: 400;
+            padding: 5px 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="to">
+
+    </div>
+
+    <script id="app" type="text/html">
+    <div class="a">
+      <h2>{{}}解析</h2>
+      <div class="content">
+        <input value="{{obj}}">
+        <div>{{title}}</div>
+      </div>
+ 
+      <h2>computed - 计算属性</h2>
+      <div class="content">
+      <div>{{title2}}</div>
+      </div>
+ 
+      <h2>双向绑定 - m-model</h2>
+      <div class="content">
+      <input m-model="arr[0]">
+      <div>{{arr}}</div>
+      </div>
+ 
+      <h2>点击事件 - m-click</h2>
+      <div class="content">
+      <div m-on:click="test">点击触发</div>
+      </div>
+ 
+      <h2>是否显示 - m-if</h2>
+      <div class="content">
+      <h1 m-if="show">显示{{title}}</h1>
+      <button m-on:click="toggle">点击显示/隐藏</button>
+      </div>
+ 
+      <h2>循环 -  m-for</h2>
+      <ul class="content">
+        <li m-for="(val, key, index) in arr">索引 {{key + 1}} ：{{val}}</li>
+      </ul>
+      <br>
+ 
+      <h2>子组件</h2>
+      <div class="content">
+         <c m-if="cshow" arr></c>
+         <button m-on:click="togglec">点击摧毁/生成子组件</button>
+      </div>
+
+     
+      <h2>vuex</h2>
+      <div class="content">
+        <p>{{counter}}</p>
+        <button m-on:click="changeState">改变值</button>
+      </div>
+
+
+      <h2>router</h2>
+      <div class="content">
+          <a href="#/home" style="margin-right:10px">home</a>
+          <a href="#/list">list</a>
+          <div id="router">
+            <router-view></router-view>
+          </div>
+         
+      </div>
+    </div>
+
+
+  
+  </div>
+  
+  </script>
+<script type="text/javascript" src="main.js"></script></body>
